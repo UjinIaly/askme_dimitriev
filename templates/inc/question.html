@@ -1,0 +1,34 @@
+{% load static %}
+
+<div style="border: none; border-radius: 16px" class="col-12 card p-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+            <img style="height: 50%; width: 50%; object-fit: cover" class="img-thumbnail" src="{% static question.img %}" alt="">
+        </div>
+        <div class="card-body col-sm-12 col-md-9">
+            <h4><a style="color: #24292E;" href="{% url "question" question.id %}">{{ question.title }}</a></h4>
+            <p style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{{ question.text }}</p>
+            <button class="btn btn-primary" href="{% url "question" question.id %}">Answer this question</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary" type="submit">&#128077 1</button>
+            <button class="btn btn-primary" type="submit">&#128078 1</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+{#            <h6>answers: {% answers|length %}</h6>#}
+            <h6>answers: 1</h6>
+        </div>
+        <div class="col-md-6 d-flex flex-direction-row">
+            <h6>Tags: </h6>
+            {% for tag in question.tags %}
+                <a style="padding-left: 16px" href="{% url "tag" tag %}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

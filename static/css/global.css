@@ -1,0 +1,92 @@
+
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background-color: #fff;
+    padding-bottom: 80px;
+}
+
+hr {
+  background-color: rgba(27, 31, 35, 0.20);
+}
+
+nav a {
+  color: #000000;
+}
+
+.btn {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "DM Sans", -apple-system, system-ui, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.btn:hover {
+  background-color: #F3F4F6;
+  color: #24292E;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  text-decoration: none;
+  transition-duration: 0.1s;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 2px 0, rgba(255, 255, 255, 0.25) 0 4px 0 inset;
+}
+
+.btn:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.btn:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+
+.btn:before {
+  display: none;
+}
+
+.correct {
+    color: #140ed5;
+}
+
+.btn-nav {
+  color: #24292E;
+}
+
+.question a {
+  color: #24292E;
+  text-decoration: none;
+}
+
+.question a:hover {
+  color: #24292E;
+  text-decoration: underline;
+}
+
+.card {
+  border:rgba(27, 31, 35, 0.04) solid 1px;
+}
+
+

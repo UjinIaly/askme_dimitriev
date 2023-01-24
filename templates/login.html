@@ -1,0 +1,27 @@
+{% extends "inc/base.html" %}
+
+{% block user %}
+    {% include "inc/header_not_authorised.html" %}
+{% endblock user %}
+
+{% block content %}
+    <h3 class="mb-5">Log In</h3>
+    <div class="card p-5">
+        <form class="form">
+            <div class="md-3 mb-3 row">
+                <label for="email">Email</label>
+                <div class="col-8">
+                    <input type="email" class="form-control" placeholder="example@example.com" id="email" required></input>
+                </div>
+            </div>
+            <div class="md-3 mb-3 row">
+                <label for="password">Password</label>
+                <div class="col-8">
+                    <input type="password" class="form-control" placeholder="123123123" id="password" required></input>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Login!"></input>
+            <a style="font-size: 12px; color:#575656; text-decoration: none; margin-left: 16px;" href="{% url "index" %}">Return to questions</a>
+        </form>
+    </div>
+{% endblock %}

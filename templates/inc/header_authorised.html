@@ -1,0 +1,46 @@
+{% load static %}
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Pupa Ask</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url "index" %}">Questions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-nowrap" href="{% url "hot" %}">Hot questions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-nowrap" href="{% url "ask" %}">Ask question</a>
+        </li>
+      </ul>
+      <div class="navbar-collapse">
+        <div class="nav-item me-auto">
+             <form action="" class="d-flex">
+                 <input type="text" class="form-control me-2" placeholder="Search">
+                 <button class="btn btn-outline-success btn-header">Search</button>
+             </form>
+        </div>
+        <div class="col-sm-12 col-md-1 d-flex justify-content-end">
+          <div class="row row-cols-1 me-1">
+            <div class="col">
+              <a class="nav-item link-primary" href="{% url "profile" %}">Profile</a> 
+            </div>
+            <div class="col">
+              <a class="nav-item text-nowrap link-primary" href="#">Log out</a>
+            </div>
+          </div>
+          <img style="height: 50%; width: 50%; object-fit: cover" class="img-thumbnail" src="../../static/img/no_avatar.jpeg" alt="">
+        </div>
+    </div>
+        </div>
+      </div>
+</nav>
+

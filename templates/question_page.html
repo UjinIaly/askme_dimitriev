@@ -1,0 +1,25 @@
+{% extends 'inc/base.html' %}
+
+{% block user %}
+    {% include "inc/header_not_authorised.html" %}
+{% endblock user %}
+
+<div class="pagination">
+    {% block content %}
+        <h3>{{ question.title }}</h3>
+        <div class="my-4">{% include "inc/question.html" %}</div>
+        <h3>Answers</h3>
+        {% for answer in answers %}
+            <div class="my-4">
+                {% include "inc/answer.html" %}
+            </div>
+        {% endfor %}
+        <hr>
+        <button class="btn">Answer this question</button>
+        <nav class="d-flex justify-content-center nav nav-pills me-auto">
+            {% for p in paginator %}
+                <a class="btn btn-nav me-2" href="?page={{ p.number }}">{{ p.number }}</a>
+            {% endfor %}
+        </nav>
+    {% endblock %}
+</div>
