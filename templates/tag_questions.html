@@ -1,0 +1,16 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+
+{% block header %}
+    <span id="page_header">Tag: <span>{{ tag }}</span></span>
+{% endblock header %}
+
+{% block content %}
+    {% for question in page_obj %}
+        {% include 'inc/one_question.html' %}
+    {% endfor %}
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}

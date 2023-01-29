@@ -1,0 +1,22 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+
+{% block header %}
+    <span href="" id="new_questions_text">Hot questions</span>
+    <a href="{% url 'index' %}" id="hot_questions_text">New questions</a>
+{% endblock header %}
+
+{% block content %}
+    {% for question in page_obj %}
+        {% include 'inc/one_question.html' %}
+    {% endfor %}
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}
+<!--
+{% block jscode %}
+	<script src= "{% static 'js/vote.js' %}"></script>
+{% endblock %}
+-->

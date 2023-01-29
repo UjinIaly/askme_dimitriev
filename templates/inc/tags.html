@@ -1,11 +1,20 @@
-<a href="{% url "tag" "c++" %}" style="padding-left: 16px">c++</a>
-<a href="{% url "tag" "twitter-bootstrap" %}" style="padding-left: 16px">twitter-bootstrap</a>
-<a href="{% url "tag" "web" %}" style="padding-left: 16px">web</a>
-<a href="{% url "tag" "frontend" %}" style="padding-left: 16px">frontend</a>
-<a href="{% url "tag" "backend" %}" style="padding-left: 16px">backend</a>
-<a href="{% url "tag" "css" %}" style="padding-left: 16px">css</a>
-<a href="{% url "tag" "html" %}" style="padding-left: 16px">html</a>
-<a href="{% url "tag" "loops" %}" style="padding-left: 16px">loops</a>
-<a href="{% url "tag" "python" %}" style="padding-left: 16px">python</a>
-<a href="{% url "tag" "django" %}" style="padding-left: 16px">django</a>
-<a href="{% url "tag" "serialization" %}" style="padding-left: 16px">serialization</a>
+<div>
+    <div class="row">
+        <span class="row tags_header">Tags</span>
+    </div>
+    <div class="row link_tags">
+        {% for tag in tags %}
+            <a class="sample_tag lang_tag" href="{% url 'tag' tag  %}">{{ tag }}</a>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <div class="row">
+        <span class="row tags_header">Best Members</span>
+    </div>
+    <div class="row link_tags">
+        {% for member in members %}
+            <a class="sample_tag" href="">{{ member }}</a>
+        {% endfor %}
+    </div>
+</div>

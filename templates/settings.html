@@ -1,0 +1,27 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="row">
+        <span id="page_header">Registration</span>
+    </div>
+    
+    <form class="form" method="POST" action="/signup/" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form_user %}
+        {% bootstrap_form form_profile %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Register</button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}
+
+{% block page_btns %}
+{% endblock page_btns %}

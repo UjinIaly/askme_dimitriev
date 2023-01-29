@@ -1,0 +1,88 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load vote_tags %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+    <div class="row main_question">
+    <div class="col-3 question_box_left">
+        <div class="row">
+            <img id="main_question_img" src="{{ question.author.image.url }}" alt="My image" class="question-img">
+        </div>
+        <div id="main_question_like_widget" class="row like_widget">
+            {% if request.user.is_authenticated %}
+                {% get_vote request.user 'question' question.id as vote %}
+                <a id="question-upvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'LIKE' %} js-vote-inactive {% endif %}" data-action="like"
+                data-oid="{{ question.id }}" data-type="question">
+                    <button class="fade-button-upvote">
+                        &uarr;
+                    </button>
+                </a>
+
+                <div class="bd-highlight like-status">
+                    <p id="question-rating-qid-{{ question.id }}">{{ question.rating }} </p>
+                </div>
+
+                <a id="question-downvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'DIS' %} js-vote-inactive {% endif %}" data-action="dislike"
+                data-oid="{{ question.id }}" data-type="question">
+                    <button class="fade-button-downvote">
+                        &darr;
+                    </button>
+                </a>
+            {% else %}
+                <div class="bd-highlight like-status">
+                    <p id="question-rating-qid-{{ question.id }}">rating: {{ question.rating }} </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+        <div class="col-9">
+            <div class="question_box_right">
+                <div class="question-title">{{ question.title }}</div>
+                <div >{{ question.text }}</div>
+                <div class="row">
+                    <div class="col">
+                        <span class="ans_tag">Tags:</span>
+                            {% for tag in tags %}
+                                <a class="ans_tag" href="{% url 'tag' tag  %}">{{ tag }}</a>
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+
+    {% for answer in page_obj %}
+        {% include 'inc/answer.html' %}
+    {% endfor %}
+
+    <hr/>
+    <a name="scroll-to-form"></a>
+    <form class="form" method="POST" action="/question/{{ question.id }}/" novalidate>
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Answer!</button>
+        {% endbuttons %}
+    </form>
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}
+
+{% block page_btns %}
+    {% include 'inc/pagination.html' %}
+{% endblock page_btns %}
+    <!--
+{% block jscode %}
+    <script src= "{% static 'js/vote.js' %}"></script>
+    <script src= "{% static 'js/correct_answer.js' %}"></script>
+{% endblock %}
+    -->

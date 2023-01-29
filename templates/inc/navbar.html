@@ -1,0 +1,28 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">Ask Me</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="form-inline mt-2 mt-md-0" action="{% url 'ask_question' %}">
+            <input class="form-control mr-sm-2" type="text" placeholder="enter your question.." aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ask!</button>
+        </form>
+    </div>
+    {% if request.user.is_authenticated %}
+    <img id="navbar_avatar_image" src="{{ request.user.profile.image.url }}" alt="My image">
+    {% endif %}
+    <div>
+        <div class="profile_info">
+            <span id="name"> {{ request.user.username }} </span>
+            <div class="header_profile_links">
+                {% if request.user.is_authenticated %}
+                    <a  href="{% url 'profile_edit' %}">profile</a>
+                    <a class="" href="{% url 'logout' %}?next={{ request.path }}">logout</a>
+                {% else %}
+                    <a class="" href="{% url 'login' %}?next={{ request.path }}">login</a>
+                    <a class="" href="{% url 'signup' %}">signup</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

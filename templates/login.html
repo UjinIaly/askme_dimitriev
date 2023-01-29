@@ -1,27 +1,29 @@
-{% extends "inc/base.html" %}
+{% extends 'inc/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
 
-{% block user %}
-    {% include "inc/header_not_authorised.html" %}
-{% endblock user %}
 
 {% block content %}
-    <h3 class="mb-5">Log In</h3>
-    <div class="card p-5">
-        <form class="form">
-            <div class="md-3 mb-3 row">
-                <label for="email">Email</label>
-                <div class="col-8">
-                    <input type="email" class="form-control" placeholder="example@example.com" id="email" required></input>
-                </div>
-            </div>
-            <div class="md-3 mb-3 row">
-                <label for="password">Password</label>
-                <div class="col-8">
-                    <input type="password" class="form-control" placeholder="123123123" id="password" required></input>
-                </div>
-            </div>
-            <input type="submit" class="btn" value="Login!"></input>
-            <a style="font-size: 12px; color:#575656; text-decoration: none; margin-left: 16px;" href="{% url "index" %}">Return to questions</a>
-        </form>
+    <div class="row">
+        <span id="page_header">Log in</span>
     </div>
-{% endblock %}
+
+    {% if error_message %}<span id="alert_message">{{ error_message }}</span>{% endif %}
+
+    <form class="form" method="POST" action="/login/?next={{ redirect_to }}" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Log in</button>
+        {% endbuttons %}
+    </form>
+    <a href="{% url 'signup' %}">Create new account</a>
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}
+
+{% block page_btns %}
+{% endblock page_btns %}

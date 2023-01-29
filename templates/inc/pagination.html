@@ -1,0 +1,25 @@
+<div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">
+                <button type="button" class="page_btn btn btn-outline-secondary">&laquo;&laquo;</button>
+            </a>
+            <a href="?page={{ page_obj.previous_page_number }}">
+                <button type="button" class="page_btn btn btn-outline-secondary">&laquo;</button>
+            </a>
+        {% endif %}
+
+        <button type="button" class="page_btn btn btn-outline-secondary">
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&nbsp;
+            </span>
+        </button>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">
+                <button type="button" class="page_btn btn btn-outline-secondary">&raquo;</button>
+            </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">
+                <button type="button" class="page_btn btn btn-outline-secondary">&raquo;&raquo;</button>
+            </a>
+        {% endif %}
+</div>

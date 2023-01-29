@@ -1,0 +1,25 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block header %}
+    <span id="new_questions_text">New question</span>
+{% endblock header %}
+
+{% block content %}
+    <form class="form" method="POST" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">ASK!</button>
+        {% endbuttons %}
+    </form>
+{% endblock content %}
+
+{% block right %}
+    {% include 'inc/tags.html' %}
+{% endblock right %}
+
+{% block page_btns %}
+{% endblock page_btns %}

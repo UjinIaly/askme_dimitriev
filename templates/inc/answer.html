@@ -1,25 +1,61 @@
 {% load static %}
+{% load vote_tags %}
 
-<div style="border: none; border-radius: 16px" class="col-12 card">
-    <div class="row p-3">
-        <div class="col-md-2">
-            <img style=" width: 90px; height: 90px; object-fit: cover" class="img-thumbnail avatar" src="{% static answer.img %}" alt="">
-            <div class="my-4">
-                    <div class="col-sm-20 col-md-15 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary" type="submit">&#128077 1</button>
-                        <button class="btn btn-primary" type="submit">&#128078 1</button>
-                    </div>
-            </div>
+<a name="{{ answer.id }}"></a>
+<div class="row question-box">
+    <div class="col-3 question_box_left">
+        <div class="row">
+            <img src="{{ answer.author.image.url }}" alt="My image" class="question-img">
         </div>
-        <div class="answer card-body col-md-6">
-            <h4>{{ answer.user }}</h4>
-            <p>{{ answer.content }}</p>
-            <div class="my-4">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Correct!
-                    </label>
+        <div class="row like_widget">
+            {% if request.user.is_authenticated %}
+                {% get_vote request.user 'answer' answer.id as vote %}
+
+                <a id="answer-upvote-btn-qid-{{ answer.id }}" href="#" class="js-vote {% if vote == 'LIKE' %} js-vote-inactive {% endif %}" data-action="like"
+                data-oid="{{ answer.id }}" data-type="answer">
+                    <button class="fade-button-upvote">
+                        &uarr;
+                    </button>
+                </a>
+
+                <div class="bd-highlight like-status">
+                    <p id="answer-rating-qid-{{ answer.id }}">{{ answer.rating }} </p>
+                </div>
+
+                <a id="answer-downvote-btn-qid-{{ answer.id }}" href="#" class="js-vote {% if vote == 'DIS' %} js-vote-inactive {% endif %}" data-action="dislike"
+                data-oid="{{ answer.id }}" data-type="answer">
+                    <button class="fade-button-downvote">
+                        &darr;
+                    </button>
+                </a>
+            {% else %}
+                <div class="bd-highlight like-status">
+                    <p id="answer-rating-qid-{{ answer.id }}">rating: {{ answer.rating }} </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-9">
+            <div class="question_box_right">
+                <div class="question-text">{{ answer.text }}</div>
+                <div class="row answers_links_bottom">
+                    <div class="col">
+                        <div class="form-check">
+                            {% if request.user.profile == question.author %}
+                                <input id="answer-iscorrect-checkbox-aid-{{ answer.id }}" class="form-check-input js-correct-answer" type="checkbox" value="" data-qid="{{question.id}}" data-aid="{{answer.id}}"
+                                {% if answer.is_correct %} checked="checked" {% endif %}>
+                                    <label id="answer-iscorrect-checkbox-label-aid-{{ answer.id }}" class="form-check-label" for="answer-iscorrect-checkbox-aid-{{ answer.id }}">
+                                        correct!
+                                    </label>
+                                </input>
+                            {% else %}
+                                {% if answer.is_correct %}
+                                <p>This answer was marked by question author as correct</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>

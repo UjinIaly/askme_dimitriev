@@ -13,25 +13,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 
-from django import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from pygments.lexer import include
 
 from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name="index"),
-    path('hot', views.hot, name="hot"),
-    path('tag/<str:tag>', views.tag, name="tag"),
-    path('questions/question<int:i>', views.question, name="question"),
-    path('login', views.login, name="login"),
-    path('registration', views.signup, name="registration"),
-    path('ask', views.ask, name="ask"),
-    path('profile', views.profile, name="profile"),
-]
+
+    path('', views.new_questions, name='index'),
+    path('hot/', views.hot_questions, name='hot_questions'),
+    path('new/', views.new_questions, name='new_questions'),
+    path('tag/<str:tag>/', views.tag_questions, name='tag'),
+
+    path('ask/', views.ask_question, name='ask_question'),
+    path('question/<int:question_id>/', views.question_answers, name='question_answers'),
+
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('signup/', views.sign_up, name='signup'),
+    path('profile/edit', views.edit_profile, name='profile_edit'),
+
+    path('vote/', views.vote, name='vote'),
+    path('correct-answer/', views.correct_answer, name='correct_answer'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
