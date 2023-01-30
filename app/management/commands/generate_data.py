@@ -12,40 +12,11 @@ class Command(BaseCommand):
     help = 'Generates Data'
 
     def add_arguments(self, parser):
-        # parser.add_argument(
-        # '--db_size',
-        # choices=['test', 'small', 'medium', 'large', 'max'],
-        # help='choose how many data to generate'
-        # )
-        # parser.add_argument('--add_users', type=int, help='users creation')
-        # parser.add_argument('--add_tags', type=int, help='tags creation')
-        # parser.add_argument('--add_questions', type=int, help='questions creation')
-        # parser.add_argument('--add_answers', type=int, help='answers creation')
-        # parser.add_argument('--add_marks', type=int, help='marks creation')
+
         parser.add_argument('--fill_db', type=int, help='filling')
 
     def handle(self, *args, **options):
-        # opt = options['db_size']
-        #    if (opt):
-        #        part = {
-        #            'test': 0.0001,
-        #            'small': 0.0005,
-        #            'medium': 0.001,
-        #            'large': 0.01,
-        #            'max': 1,
-        #        }.get(opt, 0.00005)
-        #        self.generate_database(part)
-        #
-        #    if (options['add_users']):
-        #        self.generate_users(options['add_users'])
-        #    if (options['add_tags']):
-        #        self.generate_tags(options['add_tags'])
-        #    if (options['add_questions']):
-        #        self.generate_questions(options['add_questions'])
-        #    if (options['add_answers']):
-        #        self.fill_questions_with_answers(options['add_answers'], [])
-        # if (options['add_marks']):
-        #     self.generate_marks(options['add_marks'])
+
         if options['fill_db']:
             self.generate_database(options['fill_db'])
 
