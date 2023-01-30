@@ -98,7 +98,7 @@ class Command(BaseCommand):
                 user=user,
                 user_name=name,
                 email=email,
-                image=f'/default_imgs/avatar/test{num_ava}.jpg'
+                image=f'{num_ava}.jpg'
             )
 
     def generate_tags(self, cnt):

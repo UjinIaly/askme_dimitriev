@@ -28,8 +28,6 @@ def paginate_new(request, paginator):
 
 
 def new_questions(request):
-    # sample how to use data in session storage
-    print(f'HELLO: {request.session.get("hello")}')
 
     new_questions = Question.objects.new_questions()
     question_pages = paginate(request, new_questions)
@@ -119,7 +117,6 @@ def login(request):
         if form.is_valid():
             user = auth.authenticate(request, **form.cleaned_data)
             if user is not None:
-                # sample how to store data in sessions
                 request.session['hello'] = 'world'
 
                 auth.login(request, user)
@@ -151,7 +148,6 @@ def sign_up(request):
             data = form_user.cleaned_data
             user = User.objects.create_user(username=data.get('username'), email=data.get('email'),
                                             password=data.get('password'))
-            # add validation if image is none
             profile = Profile.objects.create(
                 user=user,
                 user_name=data.get('username'),
@@ -169,20 +165,17 @@ def edit_profile(request):
     user = request.user
     if request.method == 'GET':
         form = EditProfileForm(
-            data={'user_name': user.profile.user_name, 'email': user.profile.email, 'image': user.profile.image})
+            data={'user_name': user.username, 'email': user.email, 'image': user.image})
     else:
         form = EditProfileForm(
             data=request.POST,
             files=request.FILES,
-            instance=request.user.profile)
+            instance=request.user)
         if form.is_valid():
             data = form.cleaned_data
-            user.profile.user_name = data.get('user_name')
-            user.profile.email = data.get('email')
-            user.profile.image = request.FILES.get('image', None)
+            user.image = request.FILES.get('image', None)
             user.username = data.get('user_name')
             user.email = data.get('email')
-            user.profile.save()
             user.save()
     ctx = {'form': form}
 

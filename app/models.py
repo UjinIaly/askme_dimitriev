@@ -1,9 +1,10 @@
-from django.contrib.auth.models import User
 from django.db import models
+import sys
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
-from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class ProfileManager(models.Manager):
@@ -14,18 +15,19 @@ class ProfileManager(models.Manager):
         return self.all()[:15]
 
     def get_user_vote(self, user, obj_type, obj_id):
-        type = ContentType.objects.get(app_label='app', model=obj_type)
+        type = ContentType.objects.get(app_label='app', model=obj_type)  # model='question'
 
+        # get will throw doesNotExist
         return self.get(user=user).mark_set.filter(object_id=obj_id, content_type=type).first()
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=256, verbose_name='Имя в системе')
-    email = models.EmailField(verbose_name='E-mail', default='email@mail.ru', blank=True)
+    email = models.EmailField(verbose_name='E-mail', default='email@mail.com', blank=True)
     image = models.ImageField(
         upload_to='avatar/%Y/%m/%d/',
-        default='img/no_avatar.jpeg',
+        default='no_avatar.jpg',
         blank=True,
         verbose_name='Аватарка'
     )
@@ -42,7 +44,7 @@ class Profile(models.Model):
 
 class MarkManager(models.Manager):
     def count_rating(self):
-        return self.filter(mark_type=Mark.MarkType.LIKE).count() + self.filter(mark_type=Mark.MarkType.DISLIKE).count()
+        return self.filter(mark_type=Mark.MarkType.LIKE).count() - self.filter(mark_type=Mark.MarkType.DISLIKE).count()
 
     def set_mark(self, user_id, content_object_type, content_object_id, mark_type):
         if mark_type == 'dislike':
@@ -65,12 +67,14 @@ class MarkManager(models.Manager):
         if created:
             obj.mark_type = mark_type_enum
             obj.save()
+
             if mark_type_enum == Mark.MarkType.LIKE:
                 content_object.rating += 1
             else:
                 content_object.rating -= 1
             content_object.save()
         else:
+
             if obj.mark_type != mark_type_enum:
                 obj.mark_type = mark_type_enum
                 obj.save()

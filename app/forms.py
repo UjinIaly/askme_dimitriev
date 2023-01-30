@@ -46,25 +46,24 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput())
 
 
-# TODO: добавить возможность добавить свой тэг (создание тэга)
 class AskForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'text', 'tags']
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None);
-        super().__init__(*args, **kwargs);
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
 
     def save(self, commit=True, tags=None):
         question = super().save(commit=False)
-        question.author = self.user.profile;
+        question.author = self.user.profile
 
-        if commit == True:
+        if commit:
             question.save()
             if tags is not None:
                 question.tags.set(tags)
-        return question;
+        return question
 
 
 class AnswerForm(forms.ModelForm):
@@ -73,14 +72,14 @@ class AnswerForm(forms.ModelForm):
         fields = ['text']
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None);
-        self.question_pk = kwargs.pop('question_pk', None);
-        super().__init__(*args, **kwargs);
+        self.user = kwargs.pop('user', None)
+        self.question_pk = kwargs.pop('question_pk', None)
+        super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
         answer = super().save(commit=False)
-        answer.author = self.user.profile;
+        answer.author = self.user.profile
         answer.question = Question.objects.get(pk=self.question_pk)
-        if commit == True:
+        if commit:
             answer.save()
-        return answer;
+        return answer

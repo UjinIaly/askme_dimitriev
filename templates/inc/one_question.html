@@ -3,8 +3,8 @@
 
 <div class="row question-box">
 	<div class="col-3 question_box_left">
-		<div class="row">
-			<img src="{{ question.author.image.url }}" alt="My image" class="question-img">
+		<div class="row question-img box">
+			<img src="{{ question.author.image.url }}" alt="My image">
 		</div>
 		<div class="row like_widget">
 			{% if request.user.is_authenticated %}
