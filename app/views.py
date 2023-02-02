@@ -157,10 +157,10 @@ def sign_up(request):
             return redirect("/")
 
     ctx = {'form_profile': form_profile, 'form_user': form_user}
-    return render(request, 'login.html', ctx)
+    return render(request, 'registration.html', ctx)
 
 
-@login_required
+@login_required(login_url="login", redirect_field_name="continue")
 def edit_profile(request):
     user = request.user
     if request.method == 'GET':
@@ -196,7 +196,6 @@ def vote(request):
         mark_type=data.get('action'))
     print(res)
 
-    # return new rating for js to update rating state on page
     return JsonResponse({'object_rating': res, 'action': data.get('action')})
 
 

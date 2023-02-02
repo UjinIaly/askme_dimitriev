@@ -3,7 +3,7 @@
 
 <div class="row question-box">
 	<div class="col-3 question_box_left">
-		<div class="row question-img box">
+		<div class="row question-img box justify-content-lg-start align-items-center" style="margin-left: 20px">
 			<img src="{{ question.author.image.url }}" alt="My image">
 		</div>
 		<div class="row like_widget">
@@ -27,9 +27,10 @@
 					</button>
 				</a>
 			{% else %}
-				<div class="bd-highlight like-status">
-						<p id="question-rating-qid-{{ question.id }}">rating: {{ question.rating }} </p>
-				</div>
+            <div class="col-sm-12 d-flex justify-content-lg-start align-items-center">
+                <button class="btn btn-primary" type="submit">&#128077 {{ question.Mark.LIKE.count}}</button>
+                <button class="btn btn-primary" type="submit">&#128078 {{ question.Mark.DISLIKE.count}}</button>
+            </div>
 			{% endif %}
 		</div>
 	</div>

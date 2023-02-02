@@ -9,7 +9,9 @@
         </form>
     </div>
     {% if request.user.is_authenticated %}
-    <img id="navbar_avatar_image" src="{{ request.user.profile.image.url }}" alt="My image">
+        {% if request.user.profile.image %}
+            <img id="navbar_avatar_image" src="{{ request.user.profile.image.url }}" alt="My image">
+        {% endif %}
     {% endif %}
     <div>
         <div class="profile_info">

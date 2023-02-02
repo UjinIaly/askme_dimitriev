@@ -15,7 +15,7 @@ class ProfileManager(models.Manager):
         return self.all()[:15]
 
     def get_user_vote(self, user, obj_type, obj_id):
-        type = ContentType.objects.get(app_label='app', model=obj_type)  # model='question'
+        type = ContentType.objects.get(app_label='app', model=obj_type)
 
         # get will throw doesNotExist
         return self.get(user=user).mark_set.filter(object_id=obj_id, content_type=type).first()

@@ -94,8 +94,8 @@ button.fade-button-downvote:hover {
 }
 
 .question-img {
-	width: 50%;
-	height: auto;
+	width: 120px;
+	height: 120px;
 	object-fit: cover;
 
 }
