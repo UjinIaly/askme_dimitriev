@@ -18,18 +18,18 @@
                 <a id="question-upvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'LIKE' %} js-vote-inactive {% endif %}" data-action="like"
                 data-oid="{{ question.id }}" data-type="question">
                     <button class="fade-button-upvote">
-                        &uarr;
+                        &#128077
                     </button>
                 </a>
 
-                <div class="bd-highlight like-status">
+                <div class="bd-highlight like-status" style="margin-left: 10px">
                     <p id="question-rating-qid-{{ question.id }}">{{ question.rating }} </p>
                 </div>
 
                 <a id="question-downvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'DIS' %} js-vote-inactive {% endif %}" data-action="dislike"
                 data-oid="{{ question.id }}" data-type="question">
                     <button class="fade-button-downvote">
-                        &darr;
+                        &#128078
                     </button>
                 </a>
             {% else %}
@@ -80,9 +80,8 @@
 {% block page_btns %}
     {% include 'inc/pagination.html' %}
 {% endblock page_btns %}
-    <!--
+
 {% block jscode %}
     <script src= "{% static 'js/vote.js' %}"></script>
     <script src= "{% static 'js/correct_answer.js' %}"></script>
 {% endblock %}
-    -->

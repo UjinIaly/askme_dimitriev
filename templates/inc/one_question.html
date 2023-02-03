@@ -3,8 +3,8 @@
 
 <div class="row question-box">
 	<div class="col-3 question_box_left">
-		<div class="row question-img box justify-content-lg-start align-items-center" style="margin-left: 20px">
-			<img src="{{ question.author.image.url }}" alt="My image">
+		<div class="row">
+			<img src="{{ question.author.image.url }}" alt="My image" class="question-img">
 		</div>
 		<div class="row like_widget">
 			{% if request.user.is_authenticated %}
@@ -12,29 +12,28 @@
 				<a id="question-upvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'LIKE' %} js-vote-inactive {% endif %}" data-action="like"
 				data-oid="{{ question.id }}" data-type="question">
 					<button class="fade-button-upvote">
-						&uarr;
+						&#128077
 					</button>
 				</a>
 
-				<div class="bd-highlight like-status">
+				<div class="bd-highlight like-status" style="margin-left: 10px;">
 					<p id="question-rating-qid-{{ question.id }}">{{ question.rating }}</p>
 				</div>
 
 				<a id="question-downvote-btn-qid-{{ question.id }}" href="#" class="js-vote {% if vote == 'DIS' %} js-vote-inactive {% endif %}" data-action="dislike"
 				data-oid="{{ question.id }}" data-type="question">
 					<button class="fade-button-downvote">
-						&darr;
+						&#128078
 					</button>
 				</a>
 			{% else %}
-            <div class="col-sm-12 d-flex justify-content-lg-start align-items-center">
-                <button class="btn btn-primary" type="submit">&#128077 {{ question.Mark.LIKE.count}}</button>
-                <button class="btn btn-primary" type="submit">&#128078 {{ question.Mark.DISLIKE.count}}</button>
-            </div>
+				<div class="bd-highlight like-status">
+						<p id="question-rating-qid-{{ question.id }}">rating: {{ question.rating }} </p>
+				</div>
 			{% endif %}
 		</div>
 	</div>
-    <div class="col-9">
+	<div class="col-9">
 		<div class="question_box_right">
 			<div class="question-title">{{ question.title }}</div>
 			<div class="question-text">{{ question.text }}</div>

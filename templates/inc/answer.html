@@ -14,18 +14,18 @@
                 <a id="answer-upvote-btn-qid-{{ answer.id }}" href="#" class="js-vote {% if vote == 'LIKE' %} js-vote-inactive {% endif %}" data-action="like"
                 data-oid="{{ answer.id }}" data-type="answer">
                     <button class="fade-button-upvote">
-                        &uarr;
+                        &#128077
                     </button>
                 </a>
 
-                <div class="bd-highlight like-status">
+                <div class="bd-highlight like-status" style="margin-left: 10px">
                     <p id="answer-rating-qid-{{ answer.id }}">{{ answer.rating }} </p>
                 </div>
 
                 <a id="answer-downvote-btn-qid-{{ answer.id }}" href="#" class="js-vote {% if vote == 'DIS' %} js-vote-inactive {% endif %}" data-action="dislike"
                 data-oid="{{ answer.id }}" data-type="answer">
                     <button class="fade-button-downvote">
-                        &darr;
+                        &#128078
                     </button>
                 </a>
             {% else %}
@@ -33,6 +33,13 @@
                     <p id="answer-rating-qid-{{ answer.id }}">rating: {{ answer.rating }} </p>
                 </div>
             {% endif %}
+
+        <div class="my-4">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Correct!
+                    </label>
+            </div>
         </div>
     </div>
     <div class="col-9">

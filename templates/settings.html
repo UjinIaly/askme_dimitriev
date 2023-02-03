@@ -2,19 +2,23 @@
 {% load static %}
 {% load bootstrap4 %}
 
+
 {% block content %}
     <div class="row">
-        <span id="page_header">Registration</span>
+        <span id="page_header">Profile edit</span>
     </div>
-    
-    <form class="form" method="POST" action="/signup/" novalidate enctype="multipart/form-data">
+
+    <form class="form" method="POST" action="/profile/edit" novalidate enctype="multipart/form-data">
         {% csrf_token %}
-        {% bootstrap_form form_user %}
-        {% bootstrap_form form_profile %}
+        {% bootstrap_form form %}
 
         {% buttons %}
-            <button type="submit" class="page_btn btn btn-outline-secondary">Register</button>
+            <button type="submit" class="page_btn btn btn-outline-secondary">Save</button>
         {% endbuttons %}
+    <br>
+        {% if request.user.profile.image %}
+            <img class="question-img" src="{{ request.user.profile.image.url }}" alt="My image">
+        {% endif %}
     </form>
 
 {% endblock content %}

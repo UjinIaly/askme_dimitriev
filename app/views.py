@@ -160,25 +160,28 @@ def sign_up(request):
     return render(request, 'registration.html', ctx)
 
 
-@login_required(login_url="login", redirect_field_name="continue")
+@login_required
 def edit_profile(request):
     user = request.user
     if request.method == 'GET':
         form = EditProfileForm(
-            data={'user_name': user.username, 'email': user.email, 'image': user.image})
+            data={'user_name': user.profile.user_name, 'email': user.profile.email, 'image': user.profile.image})
     else:
         form = EditProfileForm(
             data=request.POST,
             files=request.FILES,
-            instance=request.user)
+            instance=request.user.profile)
         if form.is_valid():
             data = form.cleaned_data
-            user.image = request.FILES.get('image', None)
+            user.profile.user_name = data.get('user_name')
+            user.profile.email = data.get('email')
+            user.profile.image = request.FILES.get('image', None)
             user.username = data.get('user_name')
             user.email = data.get('email')
+            user.profile.save()
             user.save()
-    ctx = {'form': form}
 
+    ctx = {'form': form}
     return render(request, 'settings.html', ctx)
 
 
@@ -196,6 +199,7 @@ def vote(request):
         mark_type=data.get('action'))
     print(res)
 
+    # return new rating for js to update rating state on page
     return JsonResponse({'object_rating': res, 'action': data.get('action')})
 
 
